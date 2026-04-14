@@ -17,6 +17,8 @@ mkdir -p shared/alloy
 mkdir -p shared/grafana/provisioning/datasources
 mkdir -p shared/grafana/provisioning/dashboards
 mkdir -p shared/grafana/dashboards
+mkdir -p shared/pyroscope
+
 
 # Download Tempo configuration
 curl -sSL -o shared/tempo/tempo.yml https://raw.githubusercontent.com/sornsub/LGTM/main/tempo/tempo.yml
@@ -38,6 +40,10 @@ curl -sSL -o shared/grafana/dashboards/ShoeHub_Dashboard.json https://raw.github
 curl -sSL -o shared/grafana/provisioning/dashboards/dashboards.yml https://raw.githubusercontent.com/sornsub/LGTM/main/grafana/dashboards.yml
 curl -sSL -o shared/grafana/provisioning/datasources/datasources.yml https://raw.githubusercontent.com/sornsub/LGTM/main/grafana/datasources.yml
 
+# Download pyroscope configuration
+curl -sSL -o shared/pyroscope/config.yaml https://raw.githubusercontent.com/sornsub/LGTM/main/pyroscope/config.yaml
+
+
 # Create Tempo data folders if not exist
 mkdir -p tempo-data/traces
 mkdir -p tempo-data/wal
@@ -45,10 +51,14 @@ mkdir -p tempo-data/wal
 # Create Mimir data folder
 mkdir -p mimir-data
 
+
+mkdir -p pyroscope-data
+
 # Set correct permissions
 chmod -R 755 shared
 chmod -R 777 tempo-data
 chmod -R 777 mimir-data
+chmod -R 777 pyroscope-data
 chmod -R 777 shared/logs/shoehub
 
 echo "All files downloaded and permissions set."
