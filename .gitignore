@@ -36,6 +36,7 @@ Desktop.ini
 __pycache__
 
 
-[Dd]ocker/shared/
+#[Dd]ocker/shared/
 [Dd]ocker/tempo-data
 [Dd]ocker/mimir-data
+[Dd]ocker/pyroscope-data

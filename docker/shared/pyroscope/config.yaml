@@ -1,0 +1,13 @@
+target: all
+
+server:
+  http_listen_port: 4040
+  log_level: info
+
+pyroscopedb:
+  data_path: /var/lib/pyroscope
+  max_block_duration: 1h
+
+limits:
+  ingestion_rate_mb: 8
+  ingestion_burst_size_mb: 16
