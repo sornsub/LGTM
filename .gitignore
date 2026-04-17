@@ -22,6 +22,8 @@
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
 
+.env
+.env.*
 *.suo
 *.user
 .vs/
@@ -35,8 +37,8 @@ Desktop.ini
 .DS_Store
 __pycache__
 
-
-#[Dd]ocker/shared/
+[Dd]ocker/shared/logs
+[Dd]ocker/shared/logs/loki
 [Dd]ocker/tempo-data
 [Dd]ocker/mimir-data
 [Dd]ocker/pyroscope-data

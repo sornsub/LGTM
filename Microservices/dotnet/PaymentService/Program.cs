@@ -34,7 +34,8 @@ builder.Services
             })
             .AddAspNetCoreInstrumentation()
             .AddConsoleExporter()
-            .SetSampler<AlwaysOnSampler>();
+            .SetSampler<AlwaysOnSampler>()
+            .AddProcessor(new Pyroscope.OpenTelemetry.PyroscopeSpanProcessor());
     });
 
 

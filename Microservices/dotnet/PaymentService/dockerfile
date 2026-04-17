@@ -1,8 +1,22 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
+
+# ตัวอย่าง: เตรียม directory ให้ profiler
+RUN mkdir -p /opt/pyroscope
+
+# ตรงนี้คุณต้อง copy profiler binaries ที่ถูกต้องเข้ามา
+# เช่น Pyroscope.Profiler.Native.so และไฟล์ที่เกี่ยวข้อง
+COPY pyroscope-dotnet/ /opt/pyroscope/
+
+ENV CORECLR_ENABLE_PROFILING=1
+ENV CORECLR_PROFILER={BD1A650D-AC5D-4896-B64F-D6FA25D6B26A}
+ENV CORECLR_PROFILER_PATH=/opt/pyroscope/Pyroscope.Profiler.Native.so
+ENV LD_LIBRARY_PATH=/opt/pyroscope
+ENV PYROSCOPE_PROFILING_ENABLED=1
+ENV PYROSCOPE_APPLICATION_NAME=payment-service
+ENV PYROSCOPE_SERVER_ADDRESS=http://alloy:9999
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -10,8 +24,6 @@ WORKDIR /src
 COPY ["PaymentService.csproj", "./"]
 RUN dotnet restore "PaymentService.csproj"
 COPY . .
-
-WORKDIR /src
 RUN dotnet build "PaymentService.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

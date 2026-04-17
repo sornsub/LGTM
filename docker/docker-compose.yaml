@@ -5,10 +5,13 @@ services:
     volumes:
       - ./shared/tempo/tempo.yml:/etc/tempo.yml
       - ./tempo-data:/var/tempo
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION}
     ports:
       - "3200:3200"
     command: ["-config.file=/etc/tempo.yml"]
-
 
   prometheus:
     image: prom/prometheus:latest
@@ -31,7 +34,6 @@ services:
       - "--config.file=/etc/mimir/config.yaml"
     depends_on:
       - prometheus
-
 
   loki:
     image: grafana/loki:latest
@@ -83,6 +85,7 @@ services:
       - "12345:12345"
       - "4317:4317"
       - "4318:4318"
+      - "9999:9999"
     depends_on:
       - tempo
       - loki
@@ -128,11 +131,18 @@ services:
       - alloy
 
   paymentservice:
-    image: aussiearef/paymentservice
+    image: sornsub/paymentservice
     ports:
       - "8082:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - CORECLR_ENABLE_PROFILING=1
+      - CORECLR_PROFILER={BD1A650D-AC5D-4896-B64F-D6FA25D6B26A}
+      - PYROSCOPE_PROFILING_ENABLED=1
+      - PYROSCOPE_APPLICATION_NAME=payment-service
+      - PYROSCOPE_SERVER_ADDRESS=http://alloy:9999
+      - LD_LIBRARY_PATH=/opt/pyroscope
+      - CORECLR_PROFILER_PATH=/opt/pyroscope/Pyroscope.Profiler.Native.so
     depends_on:
       - alloy
 

@@ -33,6 +33,17 @@ storage:
     wal:
       path: /var/tempo/wal
 
+#storage:
+#  trace:
+#    backend: s3                 
+#    s3:
+#      bucket: your-s3-bucket-name
+#      region: your-region
+#      access_key: your-access-key  # not needed if role_arn is used.
+#      secret_key: your-secret-key  # not needed if role_arn is used.
+#      role_arn: arn:aws:iam::123456789012:role/your-tempo-role
+
+
 overrides:
   defaults:
     metrics_generator:

@@ -27,12 +27,12 @@ metrics_generator:
 
 storage:
   trace:
-    backend: local
-    local:
-      path: /var/tempo/traces
-    wal:
-      path: /var/tempo/wal
-
+    backend: s3
+    s3:
+      bucket: temp-lgtm-sornsub
+      region: us-east-1
+      endpoint: s3.us-east-1.amazonaws.com
+      
 overrides:
   defaults:
     metrics_generator:
