@@ -26,6 +26,7 @@
 .env.*
 *.suo
 *.user
+*.so
 .vs/
 [Bb]in/
 [Oo]bj/
