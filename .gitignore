@@ -33,6 +33,7 @@ _UpgradeReport_Files/
 [Pp]ackages/
 
 Thumbs.db
+Microservices/dotnet/PaymentService/Pyroscope.Profiler.Native.so
 Desktop.ini
 .DS_Store
 __pycache__
