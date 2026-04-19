@@ -55,8 +55,13 @@ otelcol.exporter.prometheus "default" {
 prometheus.remote_write "default" {
   endpoint {
     url = "http://prometheus:9090/api/v1/write"
+    basic_auth {
+      username = "admin"
+      password = "password"
+    }
   }
 }
+
 
 loki.write "local" {
   endpoint {

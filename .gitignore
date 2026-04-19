@@ -38,7 +38,7 @@ Desktop.ini
 __pycache__
 
 [Dd]ocker/shared/logs
-[Dd]ocker/shared/logs/loki
+[Dd]ocker/shared/loki
 [Dd]ocker/tempo-data
 [Dd]ocker/mimir-data
 [Dd]ocker/pyroscope-data
