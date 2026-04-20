@@ -4,14 +4,31 @@
         {
             "Effect": "Allow",
             "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "s3:GetBucketPolicy"
+            ],
+            "Resource": [
+                "arn:aws:s3:::sornsub-temp-mimir-common",
+                "arn:aws:s3:::sornsub-temp-mimir-block",
+                "arn:aws:s3:::sornsub-temp-mimir-rule",
+                "arn:aws:s3:::sornsub-temp-mimir-alert"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
                 "s3:GetObject",
                 "s3:PutObject",
                 "s3:DeleteObject",
-                "s3:ListBucket"
+                "s3:AbortMultipartUpload",
+                "s3:ListMultipartUploadParts"
             ],
             "Resource": [
-                "arn:aws:s3:::*", # you can replace * wit the specific bucket name if needed 
-                "arn:aws:s3:::*/*" # you can replace * with the specific bucket name if needed e.g., :mybucket/*  
+                "arn:aws:s3:::sornsub-temp-mimir-common/*",
+                "arn:aws:s3:::sornsub-temp-mimir-block/*",
+                "arn:aws:s3:::sornsub-temp-mimir-rule/*",
+                "arn:aws:s3:::sornsub-temp-mimir-alert/*"
             ]
         }
     ]

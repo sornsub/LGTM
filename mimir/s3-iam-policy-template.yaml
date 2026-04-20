@@ -2,19 +2,72 @@
   "Version": "2012-10-17",
   "Statement": [
     {
+      "Sid": "AllowOnlyMimirUser",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::<account-id>:user/<iam-user>"
+        "AWS": "arn:aws:iam::654654383340:user/sornsub-temp-mimir-user"
       },
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:ListBucket",
-        "s3:DeleteObject"
-      ],
+      "Action": "s3:*",
       "Resource": [
-        "arn:aws:s3:::*",
-        "arn:aws:s3:::*/*"
+        "arn:aws:s3:::sornsub-temp-mimir-common",
+        "arn:aws:s3:::sornsub-temp-mimir-common/*"
+      ]
+    }
+  ]
+}
+
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowOnlyMimirUser",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::654654383340:user/sornsub-temp-mimir-user"
+      },
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::sornsub-temp-mimir-block",
+        "arn:aws:s3:::sornsub-temp-mimir-block/*"
+      ]
+    }
+  ]
+}
+
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowOnlyMimirUser",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::654654383340:user/sornsub-temp-mimir-user"
+      },
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::sornsub-temp-mimir-alert",
+        "arn:aws:s3:::sornsub-temp-mimir-alert/*"
+      ]
+    }
+  ]
+}
+
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowOnlyMimirUser",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::654654383340:user/sornsub-temp-mimir-user"
+      },
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::sornsub-temp-mimir-rule",
+        "arn:aws:s3:::sornsub-temp-mimir-rule/*"
       ]
     }
   ]
