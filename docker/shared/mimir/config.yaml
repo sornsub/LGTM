@@ -6,15 +6,60 @@ server:
 
 common:
   storage:
-    backend: filesystem
-    filesystem:
-      dir: /var/mimir/common
+    backend: s3
+    s3:
+      bucket_name: sornsub-temp-mimir-common
+      endpoint: s3.us-east-1.amazonaws.com
+      region: ${AWS_REGION}    # Use your AWS region
+      access_key_id: ${AWS_ACCESS_KEY_MIMIR_ID}
+      secret_access_key: ${AWS_SECRET_ACCESS_KEY_MIMIR}
+      insecure: false            # Set to true if using non-HTTPS S3-compatible storage (e.g., MinIO in dev)
 
 blocks_storage:
-  backend: filesystem
-  filesystem:
-    dir: /var/mimir/blocks
+  backend: s3
+  s3:
+    bucket_name: sornsub-temp-mimir-block
+    endpoint: s3.us-east-1.amazonaws.com
+    region: ${AWS_REGION} 
+    access_key_id: ${AWS_ACCESS_KEY_MIMIR_ID}
+    secret_access_key: ${AWS_SECRET_ACCESS_KEY_MIMIR}
+    insecure: false
+
+
+alertmanager_storage:
+  backend: s3
+  s3:
+    bucket_name: sornsub-temp-mimir-alert
+    endpoint: s3.us-east-1.amazonaws.com
+    region: ${AWS_REGION} 
+    access_key_id: ${AWS_ACCESS_KEY_MIMIR_ID}
+    secret_access_key: ${AWS_SECRET_ACCESS_KEY_MIMIR}
+    insecure: false
 
 ingester:
   ring:
     replication_factor: 1
+    kvstore:
+      store: memberlist #consul, etcd, or memberlist
+
+distributor:
+  ring:
+    kvstore:
+      store: memberlist
+
+store_gateway:
+  sharding_ring:
+    kvstore:
+      store: memberlist
+
+ruler:
+  ring:
+    kvstore:
+      store: memberlist
+
+querier:
+  query_store_after: 12h
+
+memberlist:
+  join_members:
+    - mimir:7946

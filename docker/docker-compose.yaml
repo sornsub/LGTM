@@ -28,10 +28,15 @@ services:
     volumes:
       - ./shared/mimir:/etc/mimir
       - ./mimir-data:/var/mimir
+    environment:
+      AWS_ACCESS_KEY_MIMIR_ID: ${AWS_ACCESS_KEY_MIMIR_ID}
+      AWS_SECRET_ACCESS_KEY_MIMIR: ${AWS_SECRET_ACCESS_KEY_MIMIR}
+      AWS_REGION: ${AWS_REGION}
     ports:
       - "9009:9009"
     command:
       - "--config.file=/etc/mimir/config.yaml"
+      - "-config.expand-env=true"
     depends_on:
       - prometheus
 
